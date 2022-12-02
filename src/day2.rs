@@ -11,9 +11,8 @@ pub fn day2() {
     //println!("{:?}", splitlines);
 
     let mut pts: i32 = 0;
-    //let mut vec = Vec::new();
 
-    for n in 1..splitlines.len() {
+    for n in 0..splitlines.len() {
         let opt: Vec<&str> = splitlines[n].split_whitespace().collect();
         println!("Opponent: {}, Me: {}", opt[0], opt[1]);
 
@@ -55,12 +54,36 @@ pub fn day2() {
     }
     //let mut maxval: i32 = 1;
     println!("My total points count is: {}", pts);
-    /*
     // Part TWO!
-    vec.sort();
-    vec.reverse();
-    let top3sum: i32 = vec[0]+vec[1]+vec[2];
-    println!("The top 3 summed calories are: {}", top3sum);
-    */
+    let mut pts2: i32 = 0;
+
+    for n in 0..splitlines.len() {
+        let opt: Vec<&str> = splitlines[n].split_whitespace().collect();
+        println!("Opponent: {}, Me: {}", opt[0], opt[1]);
+        
+        let win_pts:i32 = match opt[1] {
+            "X" => 0,
+            "Y" => 3,
+            "Z" => 6,
+            _ => 0
+        };
+
+        let me_pts:i32 = match (opt[0], opt[1]) {
+            ("A", "X") => 3, //scirrors (3) loses to rock(A) and cause a loss (X)
+            ("A", "Y") => 1,
+            ("A", "Z") => 2,
+            ("B", "X") => 1,
+            ("B", "Y") => 2,
+            ("B", "Z") => 3,
+            ("C", "X") => 2,
+            ("C", "Y") => 3,
+            ("C", "Z") => 1,
+            _ => 0
+        };
+        pts2 += win_pts;
+        pts2 += me_pts;
+
+    }
+    println!("Part 2 pts: {}", pts2);
 
 }
